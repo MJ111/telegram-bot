@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/joho/godotenv"
 	"google.golang.org/api/googleapi/transport"
 	"google.golang.org/api/youtube/v3"
 	"log"
@@ -14,6 +15,14 @@ import (
 )
 
 func main() {
+	// load .env file from given path
+	// we keep it empty it will load .env from current directory
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("TELEGRAM_APITOKEN"))
 
 	var chatid int64
